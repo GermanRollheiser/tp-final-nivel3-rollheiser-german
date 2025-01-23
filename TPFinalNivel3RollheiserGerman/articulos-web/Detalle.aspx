@@ -3,5 +3,5 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h2>Detalle</h2>
-    <a href="Default.aspx">Home</a>
+    <a href="Default.aspx">Volver al catálogo</a>
 </asp:Content>

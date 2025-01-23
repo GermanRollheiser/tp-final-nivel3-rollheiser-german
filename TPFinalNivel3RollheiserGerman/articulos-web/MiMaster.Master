@@ -26,13 +26,13 @@
                                 <a class="nav-link active" aria-current="page" href="Default.aspx">Catálogo</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="Administracion.aspx">Administración de productos</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="#">Mi perfil</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Mis favoritos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Administracion.aspx">Soy admin</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Registrarse</a>
@@ -44,10 +44,14 @@
                     </div>
                 </div>
             </nav>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
-            <footer>
-                Algo en el footer
+            <br />
+            <div class="container">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <br />
+            <footer style="text-align:center">
+                Desarrollada por Germán Rollheiser
             </footer>
         </div>
     </form>

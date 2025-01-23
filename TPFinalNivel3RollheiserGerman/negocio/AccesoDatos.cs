@@ -20,7 +20,7 @@ namespace product
 
         public AccesoDatos()
         {
-            conn = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_DB; integrated security=true");
+            conn = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security=true");
             cmd = new SqlCommand();
         }
 

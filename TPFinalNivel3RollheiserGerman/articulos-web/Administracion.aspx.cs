@@ -1,4 +1,6 @@
-﻿using System;
+﻿using product;
+using domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +13,21 @@ namespace articulos_web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["listaArticulos"] == null)
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                Session.Add("listaArticulos", negocio.toList());
+            }
+            dgvArticulos.DataSource = Session["listaArticulos"];
+            dgvArticulos.DataBind();
+        }
 
+        protected void filtro_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulo> lista = (List<Articulo>)Session["listaArticulos"];
+            List<Articulo> listaFiltrada = lista.FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+            dgvArticulos.DataSource = listaFiltrada;
+            dgvArticulos.DataBind();
         }
     }
 }
