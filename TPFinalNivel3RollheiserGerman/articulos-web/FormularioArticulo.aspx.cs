@@ -11,9 +11,11 @@ namespace articulos_web
 {
     public partial class FormularioArticulo : System.Web.UI.Page
     {
+        public bool ConfirmaEliminacion { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             txtId.Enabled = false;
+            ConfirmaEliminacion = false;
             try
             {
                 //Configuración inicial
@@ -102,6 +104,28 @@ namespace articulos_web
             else
             {
                 imgArticulo.ImageUrl = txtImagenUrl.Text;
+            }
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ConfirmaEliminacion = true;
+        }
+
+        protected void btnConfirmar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (chkConfirmar.Checked)
+                {
+                    ArticuloNegocio negocio = new ArticuloNegocio();
+                    negocio.toDelete(int.Parse(txtId.Text));
+                    Response.Redirect("Administracion.aspx");
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
             }
         }
     }

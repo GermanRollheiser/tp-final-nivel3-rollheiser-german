@@ -26,10 +26,25 @@
                 <label for="txtPrecio" class="form-label">Precio</label>
                 <asp:TextBox ID="txtPrecio" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
-            <div class="mb-3">
-                <asp:Button ID="btnGuardar" CssClass="btn btn-primary" runat="server" Text="Guardar" OnClick="btnGuardar_Click" />
-                <a href="Administracion.aspx" class="btn btn-danger">Cancelar</a>
-            </div>
+            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                <ContentTemplate>
+                    <div class="mb-3">
+                        <asp:Button ID="btnGuardar" CssClass="btn btn-primary" runat="server" Text="Guardar" OnClick="btnGuardar_Click" />
+                        <asp:Button ID="btnEliminar" CssClass="btn btn-warning" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" />
+                        <a href="Administracion.aspx" class="btn btn-danger">Cancelar</a>
+                    </div>
+                    <%if (ConfirmaEliminacion)
+                        { %>
+                    <div class="mb-3">
+                        <label for="ChkConfirmarEliminacion" class="form-label">¿Desea eliminar el artículo?</label>
+                    </div>
+                    <div class="mb-3">
+                        <asp:CheckBox ID="chkConfirmar" CssClass="form-check-inline" runat="server" />
+                        <asp:Button ID="btnConfirmar" CssClass="btn btn-outline-danger" runat="server" Text="Confirmar" OnClick="btnConfirmar_Click" />
+                    </div>
+                    <%  } %>
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
         <div class="col-6">
             <div class="mb-3">
