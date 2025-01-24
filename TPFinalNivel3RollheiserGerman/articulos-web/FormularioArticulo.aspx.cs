@@ -16,6 +16,7 @@ namespace articulos_web
             txtId.Enabled = false;
             try
             {
+                //Configuración inicial
                 if (!IsPostBack)
                 {
                     MarcaNegocio m = new MarcaNegocio();
@@ -31,6 +32,24 @@ namespace articulos_web
                     ddlCategorias.DataValueField = "Id";
                     ddlCategorias.DataTextField = "Descripcion";
                     ddlCategorias.DataBind();
+                }
+
+                //Configuración para editar datos de la entrada
+                string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+                if (id != "" && !IsPostBack)
+                {
+                    ArticuloNegocio negocio = new ArticuloNegocio();
+                    Articulo seleccionado = (negocio.toList(id))[0];
+
+                    //Pre cargar los campos
+                    txtId.Text = id;
+                    txtNombre.Text = seleccionado.Nombre;
+                    txtDescripcion.Text = seleccionado.Descripcion;
+                    txtPrecio.Text = seleccionado.Precio.ToString();
+                    txtImagenUrl.Text = seleccionado.ImagenUrl;
+                    ddlMarcas.SelectedValue = seleccionado.Marca.Id.ToString();
+                    ddlCategorias.SelectedValue = seleccionado.Categoria.Id.ToString();
+                    txtImagenUrl_TextChanged(sender, e);
                 }
             }
             catch (Exception ex)
@@ -54,7 +73,17 @@ namespace articulos_web
                 a.Marca.Id = int.Parse(ddlMarcas.SelectedValue);
                 a.Categoria = new Categoria();
                 a.Categoria.Id = int.Parse(ddlCategorias.SelectedValue);
-                n.toAdd(a);
+
+                if (Request.QueryString["id"] != null)
+                {
+                    a.Id = int.Parse(txtId.Text);
+                    n.toModify(a);
+                }
+                else
+                {
+                    n.toAdd(a);
+                }
+                
                 Response.Redirect("Administracion.aspx", false);
             }
             catch (Exception ex)
@@ -62,11 +91,6 @@ namespace articulos_web
                 Session.Add("error", ex);
                 Response.Redirect("error.aspx");
             }
-        }
-
-        protected void btnCancelar_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Administracion.aspx");
         }
 
         protected void txtImagenUrl_TextChanged(object sender, EventArgs e)

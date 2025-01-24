@@ -14,14 +14,22 @@ namespace product
     {
         private AccesoDatos data = new AccesoDatos();
 
-        public List<Articulo> toList()
+        public List<Articulo> toList(string id = "")
         {
             List<Articulo> list = new List<Articulo>();
 
             try
             {
-                data.toSetQuery("select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.ImagenUrl, A.IdCategoria, A.IdMarca, A.Precio, " +
-                    "C.Descripcion as Categoria, M.Descripcion as Marca from ARTICULOS A, CATEGORIAS C, MARCAS M where A.IdCategoria = C.Id and A.IdMarca = M.Id");
+                string query = "select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.ImagenUrl, A.IdCategoria, A.IdMarca, A.Precio, " +
+                    "C.Descripcion as Categoria, M.Descripcion as Marca from ARTICULOS A, CATEGORIAS C, MARCAS M where A.IdCategoria = C.Id and A.IdMarca = M.Id ";
+
+                data.toSetQuery(query);
+
+                if (id != "")
+                {
+                    query += " and A.Id = " + id;
+                    data.toSetQuery(query);
+                }
                 
                 data.toExecuteReader();
 

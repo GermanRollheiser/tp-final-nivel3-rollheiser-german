@@ -16,7 +16,8 @@
             <div class="row">
                 <div class="col-6"></div>
                 <div class="mb-3">
-                    <asp:GridView ID="dgvArticulos" runat="server" CssClass="table table-striped table-bordered" AutoGenerateColumns="false">
+                    <asp:GridView ID="dgvArticulos" runat="server" DataKeyNames="Id" CssClass="table table-striped table-bordered" AutoGenerateColumns="false" 
+                        OnSelectedIndexChanged="dgvArticulos_SelectedIndexChanged">
                         <Columns>
                             <asp:BoundField HeaderText="Código" DataField="Codigo" />
                             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
@@ -24,12 +25,14 @@
                             <asp:BoundField HeaderText="Marca" DataField="Marca.Descripcion" />
                             <asp:BoundField HeaderText="Categoría" DataField="Categoria.Descripcion" />
                             <asp:BoundField HeaderText="Precio" DataField="Precio" />
+                            <asp:CommandField HeaderText="Editar" ShowSelectButton="true" SelectText="📝" />
                         </Columns>
                     </asp:GridView>
-                    <a href="FormularioArticulo.aspx">Agregar</a>
+                    <a href="FormularioArticulo.aspx" class="btn btn-primary">Agregar</a>
                 </div>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <a href="Default.aspx">Volver al catálogo</a>
+    <a class="icon-link icon-link-hover" href="Default.aspx"><i class="bi bi-arrow-left"></i>Volver al catálogo</a>
+    //Ver modificar después de filtrar porque toma un id incorrecto
 </asp:Content>

@@ -24,11 +24,11 @@
             </div>
             <div class="mb-3">
                 <label for="txtPrecio" class="form-label">Precio</label>
-                <asp:TextBox ID="txtPrecio" CssClass="form-control" runat="server" TextMode="Number"></asp:TextBox>
+                <asp:TextBox ID="txtPrecio" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
             <div class="mb-3">
                 <asp:Button ID="btnGuardar" CssClass="btn btn-primary" runat="server" Text="Guardar" OnClick="btnGuardar_Click" />
-                <asp:Button ID="btnCancelar" CssClass="btn btn-danger" runat="server" Text="Cancelar" OnClick="btnCancelar_Click" />
+                <a href="Administracion.aspx" class="btn btn-danger">Cancelar</a>
             </div>
         </div>
         <div class="col-6">
