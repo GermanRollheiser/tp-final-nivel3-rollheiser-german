@@ -42,14 +42,11 @@ namespace articulos_web
         protected void chkAvanzado_CheckedChanged(object sender, EventArgs e)
         {
             FiltroAvanzado = chkAvanzado.Checked;
+            txtFiltro.Text = "";
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            dgvArticulos.DataSource = negocio.toList();
+            dgvArticulos.DataBind();
             txtFiltro.Enabled = !FiltroAvanzado;
-
-            if (!FiltroAvanzado)
-            {
-                ArticuloNegocio negocio = new ArticuloNegocio();
-                dgvArticulos.DataSource = negocio.toList();
-                dgvArticulos.DataBind();
-            }
         }
 
         protected void btnFiltrar_Click(object sender, EventArgs e)

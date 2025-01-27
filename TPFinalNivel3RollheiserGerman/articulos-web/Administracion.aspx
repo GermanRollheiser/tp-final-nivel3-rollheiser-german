@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="mb-3">
-                        <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control" placeholder="Filtrar por nombre, marca o categoría" AutoPostBack="true" OnTextChanged="filtro_TextChanged" />
+                        <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control" placeholder="Filtrar" AutoPostBack="true" OnTextChanged="filtro_TextChanged" />
                     </div>
                 </div>
                 <div class="col-6" style="display: flex; flex-direction: column; justify-content: flex-end;">
