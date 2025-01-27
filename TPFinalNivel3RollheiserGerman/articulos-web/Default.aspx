@@ -7,8 +7,16 @@
         <div class="col"></div>
         <div class="col-6">
             <div class="mb-3">
-                <asp:TextBox runat="server" ID="txtBuscar" CssClass="form-control" placeholder="Buscar" AutoPostBack="true" />
-                //Ver de agregarle funcionalidad al buscar (no gridview)
+                <asp:TextBox runat="server" ID="txtBuscar" CssClass="form-control" placeholder="Buscar" AutoPostBack="true" OnTextChanged="txtBuscar_TextChanged" />
+                <div class="form-check form-check-inline icon-link form-check-reverse">
+                    <asp:RadioButton ID="rdbNombre" Text="Nombre" runat="server" GroupName="Filtros" Checked="true" />
+                </div>
+                <div class="form-check form-check-inline icon-link form-check-reverse">
+                    <asp:RadioButton ID="rdbMarca" Text="Marca" runat="server" GroupName="Filtros" />
+                </div>
+                <div class="form-check form-check-inline icon-link form-check-reverse">
+                    <asp:RadioButton ID="rdbCategoria" Text="Categoría" runat="server" GroupName="Filtros" />
+                </div>
             </div>
         </div>
         <div class="col">
@@ -17,7 +25,7 @@
             </div>
         </div>
     </div>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="input-group">
         <asp:Repeater ID="repRepetidor" runat="server">
             <ItemTemplate>
                 <div class="col">
@@ -26,6 +34,7 @@
                         <div class="card-body">
                             <h5 class="card-title"><%#Eval("Nombre") %></h5>
                             <p class="card-text"><%#Eval("Marca") %></p>
+                            <p class="card-text"><%#Eval("Categoria") %></p>
                             <p class="card-text"><%#Eval("Precio") %></p>
                             <a href="Detalle.aspx?id=<%#Eval("ID") %>">Detalle</a>
                         </div>
@@ -34,5 +43,4 @@
             </ItemTemplate>
         </asp:Repeater>
     </div>
-    //Ver tamaño de las imagenes
 </asp:Content>

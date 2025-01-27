@@ -24,6 +24,33 @@ namespace articulos_web
         protected global::System.Web.UI.WebControls.TextBox txtBuscar;
 
         /// <summary>
+        /// Control rdbNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rdbNombre;
+
+        /// <summary>
+        /// Control rdbMarca.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rdbMarca;
+
+        /// <summary>
+        /// Control rdbCategoria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rdbCategoria;
+
+        /// <summary>
         /// Control btnBuscar.
         /// </summary>
         /// <remarks>
