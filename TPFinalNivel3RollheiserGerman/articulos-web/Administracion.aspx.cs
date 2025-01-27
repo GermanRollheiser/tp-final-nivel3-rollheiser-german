@@ -11,15 +11,18 @@ namespace articulos_web
 {
     public partial class Listado : System.Web.UI.Page
     {
+        public bool FiltroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["listaArticulos"] == null)
+            FiltroAvanzado = chkAvanzado.Checked;
+            if (!IsPostBack)
             {
+                FiltroAvanzado = false;
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 Session.Add("listaArticulos", negocio.toList());
+                dgvArticulos.DataSource = Session["listaArticulos"];
+                dgvArticulos.DataBind();
             }
-            dgvArticulos.DataSource = Session["listaArticulos"];
-            dgvArticulos.DataBind();
         }
 
         protected void filtro_TextChanged(object sender, EventArgs e)
@@ -34,6 +37,33 @@ namespace articulos_web
         {
             string id = dgvArticulos.SelectedDataKey.Value.ToString();
             Response.Redirect("FormularioArticulo.aspx?id=" + id);
+        }
+
+        protected void chkAvanzado_CheckedChanged(object sender, EventArgs e)
+        {
+            FiltroAvanzado = chkAvanzado.Checked;
+            txtFiltro.Enabled = !FiltroAvanzado;
+
+            if (!FiltroAvanzado)
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                dgvArticulos.DataSource = negocio.toList();
+                dgvArticulos.DataBind();
+            }
+        }
+
+        protected void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                dgvArticulos.DataSource = negocio.toSortBy(ddlCampo.SelectedItem.ToString(), ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzado.Text);
+                dgvArticulos.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+            }
         }
     }
 }

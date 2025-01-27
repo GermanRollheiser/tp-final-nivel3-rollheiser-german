@@ -36,7 +36,7 @@
                     <%if (ConfirmaEliminacion)
                         { %>
                     <div class="mb-3">
-                        <label for="ChkConfirmarEliminacion" class="form-label">¿Desea eliminar el artículo?</label>
+                        <asp:Label ID="lblConfirmarEliminacion" class="form-label" runat="server" Text="¿Desea eliminar el artículo?"></asp:Label>
                     </div>
                     <div class="mb-3">
                         <asp:CheckBox ID="chkConfirmar" CssClass="form-check-inline" runat="server" />
