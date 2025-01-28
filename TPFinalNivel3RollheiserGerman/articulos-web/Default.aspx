@@ -30,7 +30,7 @@
             <ItemTemplate>
                 <div class="col">
                     <div class="card h-100">
-                        <img src="<%#Eval("ImagenUrl") %>" class="card-img-top" alt="...">
+                        <img src="<%#Eval("ImagenUrl") %>" onerror="this.onerror=null;this.src='https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg';">
                         <div class="card-body">
                             <h5 class="card-title"><%#Eval("Nombre") %></h5>
                             <p class="card-text"><%#Eval("Marca") %></p>

@@ -62,4 +62,5 @@
             </asp:UpdatePanel>
         </div>
     </div>
+    //Agregar código de artículo y object fit contain a la imagen???
 </asp:Content>
