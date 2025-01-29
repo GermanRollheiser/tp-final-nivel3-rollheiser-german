@@ -45,6 +45,7 @@ namespace articulos_web
 
                     //Pre cargar los campos
                     txtId.Text = id;
+                    txtCodigo.Text = seleccionado.Codigo;
                     txtNombre.Text = seleccionado.Nombre;
                     txtDescripcion.Text = seleccionado.Descripcion;
                     txtPrecio.Text = seleccionado.Precio.ToString();
@@ -67,6 +68,7 @@ namespace articulos_web
             {
                 Articulo a = new Articulo();
                 ArticuloNegocio n = new ArticuloNegocio();
+                a.Codigo = txtCodigo.Text;
                 a.Nombre = txtNombre.Text;
                 a.Descripcion = txtDescripcion.Text;
                 a.Precio = decimal.Parse(txtPrecio.Text);

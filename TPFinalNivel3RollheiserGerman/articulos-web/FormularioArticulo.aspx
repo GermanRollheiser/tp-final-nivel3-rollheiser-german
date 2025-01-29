@@ -11,6 +11,10 @@
                 <asp:TextBox ID="txtId" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
             <div class="mb-3">
+                <label for="txtCodigo" class="form-label">Código</label>
+                <asp:TextBox ID="txtCodigo" CssClass="form-control" runat="server"></asp:TextBox>
+            </div>
+            <div class="mb-3">
                 <label for="txtNombre" class="form-label">Nombre</label>
                 <asp:TextBox ID="txtNombre" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
@@ -25,6 +29,10 @@
             <div class="mb-3">
                 <label for="txtPrecio" class="form-label">Precio</label>
                 <asp:TextBox ID="txtPrecio" CssClass="form-control" runat="server"></asp:TextBox>
+            </div>
+            <div class="mb-3">
+                <label for="txtDescripcion" class="form-label">Descripción</label>
+                <asp:TextBox ID="txtDescripcion" CssClass="form-control" Style="resize: none" runat="server" TextMode="MultiLine"></asp:TextBox>
             </div>
             <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                 <ContentTemplate>
@@ -47,20 +55,16 @@
             </asp:UpdatePanel>
         </div>
         <div class="col-6">
-            <div class="mb-3">
-                <label for="txtDescripcion" class="form-label">Descripción</label>
-                <asp:TextBox ID="txtDescripcion" CssClass="form-control" runat="server" TextMode="MultiLine"></asp:TextBox>
-            </div>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
                     <div class="mb-3">
                         <label for="txtImagenUrl" class="form-label">Imagen</label>
                         <asp:TextBox ID="txtImagenUrl" CssClass="form-control" runat="server" AutoPostBack="true" OnTextChanged="txtImagenUrl_TextChanged"></asp:TextBox>
                     </div>
-                    <asp:Image ID="imgArticulo" CssClass="mx-auto d-block" ImageUrl="https://i.pinimg.com/474x/e8/ee/07/e8ee0728e1ba12edd484c111c1f492f2.jpg" Width="40%" runat="server" />
+                    <asp:Image ID="imgArticulo" onerror="this.onload = null; this.src='https://i.pinimg.com/474x/e8/ee/07/e8ee0728e1ba12edd484c111c1f492f2.jpg';" 
+                        CssClass="object-fit-contain" ImageUrl="https://i.pinimg.com/474x/e8/ee/07/e8ee0728e1ba12edd484c111c1f492f2.jpg" Width="100%" Height="530" runat="server" />
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
     </div>
-    //Agregar código de artículo y object fit contain a la imagen???
 </asp:Content>
