@@ -25,12 +25,13 @@
             </div>
         </div>
     </div>
-    <div class="input-group">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
         <asp:Repeater ID="repRepetidor" runat="server">
             <ItemTemplate>
                 <div class="col">
-                    <div class="card h-100">
-                        <img src="<%#Eval("ImagenUrl") %>" onerror="this.onerror=null;this.src='https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg';">
+                    <div class="card border-2 border-primary-subtle">
+                        <img src="<%#Eval("ImagenUrl") %>" onerror="this.onerror=null;this.src='https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg';" 
+                            class="object-fit-contain" style="width:100%;height:445px" />
                         <div class="card-body">
                             <h5 class="card-title"><%#Eval("Nombre") %></h5>
                             <p class="card-text"><%#Eval("Marca") %></p>
