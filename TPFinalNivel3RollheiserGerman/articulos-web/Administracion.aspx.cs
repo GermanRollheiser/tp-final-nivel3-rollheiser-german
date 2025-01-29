@@ -14,6 +14,12 @@ namespace articulos_web
         public bool FiltroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuario"] == null || ((Usuario)Session["usuario"]).TipoUsuario == TipoUsuario.NORMAL)
+            {
+                Session.Add("error", "Necesitás permisos como admin para ingresar");
+                Response.Redirect("Error.aspx", false);
+            }
+
             FiltroAvanzado = chkAvanzado.Checked;
             if (!IsPostBack)
             {
