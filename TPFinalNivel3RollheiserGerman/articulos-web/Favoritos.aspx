@@ -9,7 +9,7 @@
             <div class="mb-3">
                 <asp:Button ID="btnAgregar" CssClass="btn btn-primary" runat="server" Text="Agregar" OnClick="btnAgregar_Click" />
                 <asp:Button ID="btnEliminar" CssClass="btn btn-warning" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" />
-                <a href="Perfil" class="btn btn-success">Editar Perfil</a>
+                <a href="Perfil.aspx" class="btn btn-success">Editar Perfil</a>
                 <a href="Default.aspx" class="btn btn-danger">Cancelar</a>
             </div>
         </div>

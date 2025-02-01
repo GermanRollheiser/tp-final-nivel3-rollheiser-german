@@ -11,7 +11,7 @@ namespace articulos_web
 {
 
 
-    public partial class Listado
+    public partial class Administracion
     {
 
         /// <summary>

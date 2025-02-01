@@ -10,7 +10,7 @@
         </div>
         <div class="mb-3">
             <a class="icon-link icon-link-hover" href="Default.aspx"><i class="bi bi-arrow-left"></i>Volver al catálogo</a>
-            //Ver funcionalidad para volver a la´página anterior o directamente quitar el link
+            //Ver funcionalidad para volver a la página anterior o directamente quitar el link y agregar alguna imagen de error
         </div>
     </div>
 </asp:Content>

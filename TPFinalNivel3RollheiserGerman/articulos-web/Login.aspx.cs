@@ -18,17 +18,19 @@ namespace articulos_web
 
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
-            Usuario usuario;
+            Usuario usuario = new Usuario();
             UsuarioNegocio negocio = new UsuarioNegocio();
             try
             {
-                usuario = new Usuario(txtEmail.Text, txtPass.Text, false);
+                usuario.Email = txtEmail.Text;
+                usuario.Pass = txtPass.Text;
                 if (negocio.toLogin(usuario))
                 {
                     Session.Add("usuario", usuario);
+                    //string id = usuario.Id.ToString();
                     if (usuario.TipoUsuario == TipoUsuario.NORMAL)
                     {
-                        Response.Redirect("Favoritos.aspx", false);
+                        Response.Redirect("Perfil.aspx", false);
                     }
                     else
                     {

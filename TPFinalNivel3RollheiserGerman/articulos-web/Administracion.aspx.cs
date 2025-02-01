@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace articulos_web
 {
-    public partial class Listado : System.Web.UI.Page
+    public partial class Administracion : System.Web.UI.Page
     {
         public bool FiltroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)

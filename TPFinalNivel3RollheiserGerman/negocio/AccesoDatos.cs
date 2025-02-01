@@ -60,6 +60,21 @@ namespace product
             }
         }
 
+        public int toExcecuteScalar()
+        {
+            cmd.Connection = conn;
+
+            try
+            {
+                conn.Open();
+                return int.Parse(cmd.ExecuteScalar().ToString());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void toSetParameter(string name, object value)
         {
             cmd.Parameters.AddWithValue(name, value);
