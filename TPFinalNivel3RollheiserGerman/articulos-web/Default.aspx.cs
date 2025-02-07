@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using product;
 using domain;
+using System.Web.Services.Description;
+using System.Text;
 
 namespace articulos_web
 {
@@ -16,6 +18,7 @@ namespace articulos_web
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
             ListaArticulo = negocio.toList();
+
             if (!IsPostBack)
             {
                 repRepetidor.DataSource = ListaArticulo;
@@ -37,6 +40,7 @@ namespace articulos_web
             List<Articulo> listaFiltradaNombre = ListaArticulo.FindAll(x => x.Nombre.ToUpper().Contains(txtBuscar.Text.ToUpper()));
             List<Articulo> listaFiltradaMarca = ListaArticulo.FindAll(x => x.Marca.Descripcion.ToUpper().Contains(txtBuscar.Text.ToUpper()));
             List<Articulo> listaFiltradaCategoria = ListaArticulo.FindAll(x => x.Categoria.Descripcion.ToUpper().Contains(txtBuscar.Text.ToUpper()));
+
             if (rdbNombre.Checked)
             {
                 repRepetidor.DataSource = listaFiltradaNombre;

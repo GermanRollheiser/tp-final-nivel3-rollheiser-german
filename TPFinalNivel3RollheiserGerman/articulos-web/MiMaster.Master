@@ -27,11 +27,12 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="Default.aspx">Catálogo</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Perfil.aspx">Mi perfil</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Favoritos.aspx">Mis favoritos</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mi perfil</a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item btn btn-secundary" href="Perfil.aspx">Editar perfil</a></li>
+                                    <li><a class="dropdown-item btn btn-secundary" href="Favoritos.aspx">Mis favoritos</a></li>
+                                </ul>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="Administracion.aspx">Soy admin</a>
@@ -50,14 +51,14 @@
                                 else
                                 {%>
                             <li class="nav-item form-check-inline">
-                                <asp:Label ID="lblPerfil" style="color:whitesmoke" class="dropdown-toggle-split align-text-top" runat="server" Text="Label"></asp:Label>
+                                <asp:Label ID="lblPerfil" Style="color: whitesmoke" class="dropdown-toggle-split align-text-top" runat="server" Text="Label"></asp:Label>
                                 <asp:Button ID="btnSalir" runat="server" Text="Salir" CssClass="btn btn-primary m-1" OnClick="btnSalir_Click" />
                             </li>
                             <% }%>
-                            <a id="lnkAvatar" class="navbar-brand" href="Perfil.aspx">
-                                <asp:Image ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%;" class="rounded-5"
-                                    onerror="this.onload = null; this.src='https://icon-library.com/images/no-profile-pic-icon/no-profile-pic-icon-11.jpg';" runat="server" />
-                            </a>
+                            <li><a id="lnkAvatar" class="navbar-brand" href="Perfil.aspx">
+                                <asp:Image ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%;" class="rounded-5 m-1"
+                                    onerror="this.onload = null; this.src='https://www.pngkey.com/png/full/503-5035055_a-festival-celebrating-tractors-profile-picture-placeholder-round.png';" runat="server" />
+                            </a></li>
                         </ul>
                     </div>
                 </div>

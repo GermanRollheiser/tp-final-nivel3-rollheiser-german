@@ -6,6 +6,7 @@
     <div class="row">
         <div class="col"></div>
         <div class="col-6">
+            <h1>Iniciar sesión</h1>
             <div class="mb-3">
                 <label for="txtEmail" class="form-label">Email</label>
                 <asp:TextBox ID="txtEmail" CssClass="form-control" runat="server"></asp:TextBox>

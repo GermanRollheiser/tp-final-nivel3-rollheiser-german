@@ -11,19 +11,48 @@ namespace articulos_web
 {
     public partial class Favoritos : System.Web.UI.Page
     {
+        public List<Favorito> ListaFavorito { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Seguridad.activeSession(Session["usuario"]))
+            {
+                Usuario usuario = (Usuario)Session["usuario"];
+                string idUser = usuario.Id.ToString();
+                FavoritoNegocio negocio = new FavoritoNegocio();
+                ListaFavorito = negocio.toList(idUser);
 
+                if (!IsPostBack)
+                {
+                    repRepetidor.DataSource = ListaFavorito;
+                    repRepetidor.DataBind();
+                }
+
+                if (!ListaFavorito.Any())
+                {
+                    imgListaVacia.Visible = true;
+                }
+            }
         }
 
-        protected void btnAgregar_Click(object sender, EventArgs e)
+        protected void btnNoFav_Click(object sender, EventArgs e)
         {
+            try
+            {
+                FavoritoNegocio negocio = new FavoritoNegocio();
+                Usuario usuario = (Usuario)Session["usuario"];
+                string articulo = ((Button)sender).CommandArgument;
 
-        }
+                int idUser = usuario.Id;
+                int idArticulo = int.Parse(articulo);
 
-        protected void btnEliminar_Click(object sender, EventArgs e)
-        {
+                negocio.toDelete(idUser, idArticulo);
 
+                Response.Redirect("Favoritos.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+            }
         }
     }
 }

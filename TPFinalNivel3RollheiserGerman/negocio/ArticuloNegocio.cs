@@ -74,7 +74,7 @@ namespace product
         {
             try
             {
-                data.toClearParameter();
+                //data.toClearParameter();
 
                 data.toSetQuery("insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, ImagenUrl, Precio) " +
                 "values (@codigo, @nombre, @descripcion, @idMarca, @idCategoria, @imagenUrl, @precio)");
@@ -97,7 +97,7 @@ namespace product
         {
             try
             {
-                data.toClearParameter();
+                //data.toClearParameter();
 
                 data.toSetQuery("update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @descripcion, " +
                     "IdMarca = @idMarca, IdCategoria = @idCategoria, ImagenUrl = @imagenUrl, Precio = @precio where Id = @id");
@@ -120,7 +120,7 @@ namespace product
         {
             try
             {
-                data.toClearParameter();
+                //data.toClearParameter();
 
                 data.toSetQuery("delete from ARTICULOS where Id = @id");
 

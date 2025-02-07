@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div class="row">
         <div class="col"></div>
         <div class="col-6">
@@ -25,23 +26,28 @@
             </div>
         </div>
     </div>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <asp:Repeater ID="repRepetidor" runat="server">
-            <ItemTemplate>
-                <div class="col">
-                    <div class="card border-2 border-primary-subtle">
-                        <img src="<%#Eval("ImagenUrl") %>" onerror="this.onerror=null;this.src='https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg';" 
-                            class="object-fit-contain" style="width:100%;height:445px" />
-                        <div class="card-body">
-                            <h5 class="card-title"><%#Eval("Nombre") %></h5>
-                            <p class="card-text"><%#Eval("Marca") %></p>
-                            <p class="card-text"><%#Eval("Categoria") %></p>
-                            <p class="card-text"><%#Eval("Precio") %></p>
-                            <a href="Detalle.aspx?id=<%#Eval("ID") %>">Detalle</a>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <asp:Repeater ID="repRepetidor" runat="server">
+                    <ItemTemplate>
+                        <div class="col">
+                            <div class="card border-2 border-primary-subtle">
+                                <a href="Detalle.aspx?id=<%#Eval("ID") %>" style="text-decoration:none; color:black">
+                                <img src="<%#Eval("ImagenUrl") %>" onerror="this.onerror=null;this.src='https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg';"
+                                    class="object-fit-contain" style="width: 100%; height: 445px" />
+                                <div class="card-body">
+                                    <h5 class="card-title d-inline align-text-top"><%#Eval("Nombre") %></h5>
+                                    <p class="card-text"><%#Eval("Marca") %></p>
+                                    <p class="card-text"><%#Eval("Categoria") %></p>
+                                    <p class="card-text"><%#Eval("Precio") %></p>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </ItemTemplate>
-        </asp:Repeater>
-    </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 </asp:Content>

@@ -13,7 +13,7 @@ namespace articulos_web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!(Page is Login || Page is Signup || Page is Default || Page is Error))
+            if (!(Page is Login || Page is Signup || Page is Default || Page is Detalle || Page is Error))
             {
                 if (!Seguridad.activeSession(Session["usuario"]))
                 {
@@ -32,12 +32,12 @@ namespace articulos_web
                 }
                 else
                 {
-                    imgAvatar.ImageUrl = "https://icon-library.com/images/no-profile-pic-icon/no-profile-pic-icon-11.jpg";
+                    imgAvatar.ImageUrl = "https://www.pngkey.com/png/full/503-5035055_a-festival-celebrating-tractors-profile-picture-placeholder-round.png";
                 }
             }
             else
             {
-                imgAvatar.ImageUrl = "https://icon-library.com/images/no-profile-pic-icon/no-profile-pic-icon-11.jpg";
+                imgAvatar.ImageUrl = "https://www.pngkey.com/png/full/503-5035055_a-festival-celebrating-tractors-profile-picture-placeholder-round.png";
             }
         }
 

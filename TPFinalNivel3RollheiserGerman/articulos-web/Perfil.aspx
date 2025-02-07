@@ -52,8 +52,8 @@
                 <label for="imagenPerfil" class="form-label">Imagen de perfil</label>
                 <input type="file" id="imagenPerfil" runat="server" class="form-control" autopostback="true" onchange="previewImg(this);" />
                 <div class="mb-3"></div>
-                <asp:Image ID="imgNuevoPerfil" onerror="this.onload = null; this.src='https://icon-library.com/images/no-profile-pic-icon/no-profile-pic-icon-11.jpg';"
-                    CssClass="object-fit-contain" ImageUrl="https://icon-library.com/images/no-profile-pic-icon/no-profile-pic-icon-11.jpg" Width="100%" Height="400" runat="server" />
+                <asp:Image ID="imgNuevoPerfil" onerror="this.onload = null; this.src='https://www.pngkey.com/png/full/503-5035055_a-festival-celebrating-tractors-profile-picture-placeholder-round.png';"
+                    CssClass="object-fit-contain" ImageUrl="https://www.pngkey.com/png/full/503-5035055_a-festival-celebrating-tractors-profile-picture-placeholder-round.png" Width="100%" Height="400" runat="server" />
             </div>
         </div>
     </div>

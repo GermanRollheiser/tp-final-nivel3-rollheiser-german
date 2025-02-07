@@ -27,10 +27,9 @@ namespace articulos_web
                 if (negocio.toLogin(usuario))
                 {
                     Session.Add("usuario", usuario);
-                    //string id = usuario.Id.ToString();
                     if (usuario.TipoUsuario == TipoUsuario.NORMAL)
                     {
-                        Response.Redirect("Perfil.aspx", false);
+                        Response.Redirect("Default.aspx", false);
                     }
                     else
                     {
