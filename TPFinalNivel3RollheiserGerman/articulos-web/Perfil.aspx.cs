@@ -54,12 +54,8 @@ namespace articulos_web
                 modificado.Nombre = txtNombre.Text;
                 modificado.Apellido = txtApellido.Text;
                 modificado.Email = txtEmail.Text;
-
-                if (txtPass.Text != "" && txtPassConfirmar.Text != "")
-                {
-                    modificado.Pass = txtPass.Text;
-                    modificado.Pass = txtPassConfirmar.Text;
-                }
+                modificado.Pass = txtPass.Text;
+                modificado.Pass = txtPassConfirmar.Text;
 
                 //Escribir img si se cargó algo
                 if (imagenPerfil.PostedFile.FileName != "")

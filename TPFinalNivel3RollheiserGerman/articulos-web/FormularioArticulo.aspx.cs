@@ -71,7 +71,12 @@ namespace articulos_web
                 a.Codigo = txtCodigo.Text;
                 a.Nombre = txtNombre.Text;
                 a.Descripcion = txtDescripcion.Text;
-                a.Precio = decimal.Parse(txtPrecio.Text);
+
+                if (txtPrecio.Text != "")
+                {
+                    a.Precio = decimal.Parse(txtPrecio.Text);
+                }
+                
                 a.ImagenUrl = txtImagenUrl.Text;
                 a.Marca = new Marca();
                 a.Marca.Id = int.Parse(ddlMarcas.SelectedValue);
@@ -88,7 +93,7 @@ namespace articulos_web
                     n.toAdd(a);
                 }
                 
-                Response.Redirect("Administracion.aspx", false);
+                Response.Redirect("AdminArticulos.aspx", false);
             }
             catch (Exception ex)
             {
@@ -122,7 +127,7 @@ namespace articulos_web
                 {
                     ArticuloNegocio negocio = new ArticuloNegocio();
                     negocio.toDelete(int.Parse(txtId.Text));
-                    Response.Redirect("Administracion.aspx");
+                    Response.Redirect("AdminArticulos.aspx", false);
                 }
             }
             catch (Exception ex)

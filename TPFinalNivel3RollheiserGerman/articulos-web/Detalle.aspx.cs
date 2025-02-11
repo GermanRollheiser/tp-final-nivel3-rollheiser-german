@@ -102,7 +102,14 @@ namespace articulos_web
 
         protected void txtImagenUrl_Load(object sender, EventArgs e)
         {
-            imgArticulo.ImageUrl = txtImagenUrl.Text;
+            if (txtImagenUrl.Text == "")
+            {
+                imgArticulo.ImageUrl = "https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg";
+            }
+            else
+            {
+                imgArticulo.ImageUrl = txtImagenUrl.Text;
+            }
         }
 
         protected void btnFav_Click(object sender, EventArgs e)

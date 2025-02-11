@@ -34,8 +34,12 @@
                                     <li><a class="dropdown-item btn btn-secundary" href="Favoritos.aspx">Mis favoritos</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Administracion.aspx">Soy admin</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Soy admin</a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item btn btn-secundary" href="AdminArticulos.aspx">Administración de artículos</a></li>
+                                    <li><a class="dropdown-item btn btn-secundary" href="AdminUsuarios.aspx">Administración de usuarios</a></li>
+                                </ul>
                             </li>
                         </ul>
                         <ul class="navbar-nav ms-auto">

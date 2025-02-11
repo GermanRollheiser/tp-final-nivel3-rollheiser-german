@@ -3,79 +3,34 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <h2>Administración de artículos</h2>
-    <asp:UpdatePanel runat="server">
-        <ContentTemplate>
-            <div class="row">
-                <div class="col-6">
-                    <div class="mb-3">
-                        <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control" placeholder="Filtrar" AutoPostBack="true" OnTextChanged="filtro_TextChanged" />
-                    </div>
-                </div>
-                <div class="col-6" style="display: flex; flex-direction: column; justify-content: flex-end;">
-                    <div class="mb-3">
-                        <asp:CheckBox ID="chkAvanzado" CssClass="form-check-inline" runat="server" AutoPostBack="true" OnCheckedChanged="chkAvanzado_CheckedChanged" />
-                        <asp:Label ID="lblFiltroAvanzado" class="form-label" runat="server" Text="Filtro Avanzado"></asp:Label>
-                    </div>
-                </div>
+    <h1>Administración</h1>
+    <div class="row">
+        <div class="col-6">
+            <div class="col-9 mb-3">
+                <a href="AdminArticulos.aspx" style="text-decoration: none">
+                    <asp:Image ID="imgAdmArt" onerror="this.onload = null; this.src='https://www.pngkey.com/png/full/503-5035055_a-festival-celebrating-tractors-profile-picture-placeholder-round.png';"
+                        CssClass="object-fit-contain" ImageUrl="https://img.freepik.com/free-vector/illustration-multitasking-person_23-2148405070.jpg" Width="100%" Height="400" runat="server" />
+                </a>
             </div>
-            <%if (FiltroAvanzado)
-                {%>
-            <div class="row">
-                <div class="col-3">
-                    <div class="mb-3">
-                        <asp:Label Text="Campo" ID="lblCampo" runat="server"></asp:Label>
-                        <asp:DropDownList ID="ddlCampo" runat="server" CssClass="form-control" AutoPostBack="true">
-                            <asp:ListItem Text="Nombre" />
-                            <asp:ListItem Text="Marca" />
-                            <asp:ListItem Text="Categoría" />
-                        </asp:DropDownList>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="mb-3">
-                        <asp:Label Text="Criterio" ID="lblCriterio" runat="server"></asp:Label>
-                        <asp:DropDownList ID="ddlCriterio" runat="server" CssClass="form-control">
-                            <asp:ListItem Text="Contiene" />
-                            <asp:ListItem Text="Comienza con" />
-                            <asp:ListItem Text="Termina con" />
-                        </asp:DropDownList>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="mb-3">
-                        <asp:Label Text="Filtro" ID="lblFiltro" runat="server"></asp:Label>
-                        <asp:TextBox ID="txtFiltroAvanzado" CssClass="form-control" runat="server"></asp:TextBox>
-                    </div>
-                </div>
-                <div class="col" style="display: flex; flex-direction: column; justify-content: flex-end;">
-                    <div class="mb-3">
-                        <asp:Button ID="btnFiltrar" CssClass="btn btn-primary" runat="server" Text="Filtrar" OnClick="btnFiltrar_Click" />
-                    </div>
-                </div>
+            <div class="mb-3 display-6 ms-3">
+                <asp:Label ID="lblAdmArt" runat="server" Text="Administración de articulos"></asp:Label>
             </div>
-            <%} %>
-            <div class="row">
-                <div class="col-6">
-                </div>
-                <div class="mb-3">
-                    <asp:GridView ID="dgvArticulos" runat="server" DataKeyNames="Id" CssClass="table table-striped table-bordered" AutoGenerateColumns="false"
-                        OnSelectedIndexChanged="dgvArticulos_SelectedIndexChanged">
-                        <Columns>
-                            <asp:BoundField HeaderText="Código" DataField="Codigo" />
-                            <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
-                            <asp:BoundField HeaderText="Descripción" DataField="Descripcion" />
-                            <asp:BoundField HeaderText="Marca" DataField="Marca.Descripcion" />
-                            <asp:BoundField HeaderText="Categoría" DataField="Categoria.Descripcion" />
-                            <asp:BoundField HeaderText="Precio" DataField="Precio" />
-                            <asp:CommandField HeaderText="Editar" ShowSelectButton="true" SelectText="📝" />
-                        </Columns>
-                    </asp:GridView>
-                    <a href="FormularioArticulo.aspx" class="btn btn-primary">Agregar</a>
-                </div>
+        </div>
+        <div class="col-6">
+            <div class="col-9 mb-3">
+                <a href="AdminUsuarios.aspx" style="text-decoration: none">
+                    <asp:Image ID="Image1" onerror="this.onload = null; this.src='https://www.pngkey.com/png/full/503-5035055_a-festival-celebrating-tractors-profile-picture-placeholder-round.png';"
+                        CssClass="object-fit-contain" ImageUrl="https://img.freepik.com/vector-premium/icono-vectorial-3d-figura-humana-simple-rojo-que-representa-individualidad-identidad_6011-1479.jpg?semt=ais_hybrid" Width="100%" Height="400" runat="server" />
+                </a>
             </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
-    <a class="icon-link icon-link-hover" href="Default.aspx"><i class="bi bi-arrow-left"></i>Volver al catálogo</a>
+            <div class="mb-3 display-6 ms-3">
+                <asp:Label ID="lblAdmUs" runat="server" Text="Administración de usuarios"></asp:Label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3">
+            <a class="icon-link icon-link-hover" href="Default.aspx"><i class="bi bi-arrow-left"></i>Volver al catálogo</a>
+        </div>
+    </div>
 </asp:Content>

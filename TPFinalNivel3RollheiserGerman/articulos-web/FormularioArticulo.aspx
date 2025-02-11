@@ -39,7 +39,7 @@
                     <div class="mb-3">
                         <asp:Button ID="btnGuardar" CssClass="btn btn-primary" runat="server" Text="Guardar" OnClick="btnGuardar_Click" />
                         <asp:Button ID="btnEliminar" CssClass="btn btn-warning" runat="server" Text="Eliminar" OnClick="btnEliminar_Click" />
-                        <a href="Administracion.aspx" class="btn btn-danger">Cancelar</a>
+                        <a href="AdminArticulos.aspx" class="btn btn-danger">Cancelar</a>
                     </div>
                     <%if (ConfirmaEliminacion)
                         { %>
