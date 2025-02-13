@@ -14,23 +14,31 @@ namespace articulos_web
         public List<Favorito> ListaFavorito { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Seguridad.activeSession(Session["usuario"]))
+            try
             {
-                Usuario usuario = (Usuario)Session["usuario"];
-                string idUser = usuario.Id.ToString();
-                FavoritoNegocio negocio = new FavoritoNegocio();
-                ListaFavorito = negocio.toList(idUser);
-
-                if (!IsPostBack)
+                if (Seguridad.activeSession(Session["usuario"]))
                 {
-                    repRepetidor.DataSource = ListaFavorito;
-                    repRepetidor.DataBind();
-                }
+                    Usuario usuario = (Usuario)Session["usuario"];
+                    string idUser = usuario.Id.ToString();
+                    FavoritoNegocio negocio = new FavoritoNegocio();
+                    ListaFavorito = negocio.toList(idUser);
 
-                if (!ListaFavorito.Any())
-                {
-                    imgListaVacia.Visible = true;
+                    if (!IsPostBack)
+                    {
+                        repRepetidor.DataSource = ListaFavorito;
+                        repRepetidor.DataBind();
+                    }
+
+                    if (!ListaFavorito.Any())
+                    {
+                        imgListaVacia.Visible = true;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
 
@@ -51,7 +59,8 @@ namespace articulos_web
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
     }

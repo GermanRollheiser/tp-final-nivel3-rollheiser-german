@@ -1,6 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MiMaster.Master" AutoEventWireup="true" CodeBehind="FormularioArticulo.aspx.cs" Inherits="articulos_web.FormularioArticulo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+    .validacion {
+        color: red;
+        font-size: 15px;
+    }
+</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -12,11 +18,12 @@
             </div>
             <div class="mb-3">
                 <label for="txtCodigo" class="form-label">Código</label>
-                <asp:TextBox ID="txtCodigo" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtCodigo" CssClass="form-control" runat="server" MaxLength="50"></asp:TextBox>
             </div>
             <div class="mb-3">
                 <label for="txtNombre" class="form-label">Nombre</label>
-                <asp:TextBox ID="txtNombre" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtNombre" CssClass="form-control" Required runat="server" MaxLength="50"></asp:TextBox>
+                <asp:RequiredFieldValidator CssClass="validacion" ErrorMessage="Nombre es un campo requerido." ControlToValidate="txtNombre" runat="server" />
             </div>
             <div class="mb-3">
                 <label for="ddlMarcas" class="form-label">Marca</label>
@@ -29,10 +36,12 @@
             <div class="mb-3">
                 <label for="txtPrecio" class="form-label">Precio</label>
                 <asp:TextBox ID="txtPrecio" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator CssClass="validacion" ErrorMessage="Solo números en formato dinero. Ejemplo: 1.00" ControlToValidate="txtPrecio" ValidationExpression="\d+(\.\d\d)?$" 
+                    runat="server" />
             </div>
             <div class="mb-3">
                 <label for="txtDescripcion" class="form-label">Descripción</label>
-                <asp:TextBox ID="txtDescripcion" CssClass="form-control" Style="resize: none" runat="server" TextMode="MultiLine"></asp:TextBox>
+                <asp:TextBox ID="txtDescripcion" CssClass="form-control" Style="resize: none" runat="server" TextMode="MultiLine" MaxLength="150"></asp:TextBox>
             </div>
             <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                 <ContentTemplate>
@@ -59,7 +68,7 @@
                 <ContentTemplate>
                     <div class="mb-3">
                         <label for="txtImagenUrl" class="form-label">Imagen</label>
-                        <asp:TextBox ID="txtImagenUrl" CssClass="form-control" runat="server" AutoPostBack="true" OnTextChanged="txtImagenUrl_TextChanged"></asp:TextBox>
+                        <asp:TextBox ID="txtImagenUrl" CssClass="form-control" runat="server" AutoPostBack="true" OnTextChanged="txtImagenUrl_TextChanged" MaxLength="1000"></asp:TextBox>
                     </div>
                     <asp:Image ID="imgArticulo" onerror="this.onload = null; this.src='https://i.pinimg.com/474x/e8/ee/07/e8ee0728e1ba12edd484c111c1f492f2.jpg';" 
                         CssClass="object-fit-contain" ImageUrl="https://i.pinimg.com/474x/e8/ee/07/e8ee0728e1ba12edd484c111c1f492f2.jpg" Width="100%" Height="530" runat="server" />

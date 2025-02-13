@@ -57,8 +57,8 @@ namespace articulos_web
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
-                Response.Redirect("error.aspx");
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
 
@@ -66,11 +66,29 @@ namespace articulos_web
         {
             try
             {
+                Page.Validate();
+                if (!Page.IsValid)
+                {
+                    return;
+                }
+
                 Articulo a = new Articulo();
                 ArticuloNegocio n = new ArticuloNegocio();
                 a.Codigo = txtCodigo.Text;
                 a.Nombre = txtNombre.Text;
                 a.Descripcion = txtDescripcion.Text;
+
+                if (Validacion.validaTextoVacio(txtNombre))
+                {
+                    Session.Add("error", "El artículo no puede ser cargado completamente vacío. El nombre es un campo requerido.");
+                    Response.Redirect("Error.aspx");
+                }
+
+                if (Validacion.validaPrecio(txtPrecio.Text))
+                {
+                    Session.Add("error", "El campo precio requere solo números en formato dinero. Ejemplo: 1.00");
+                    Response.Redirect("Error.aspx");
+                }
 
                 if (txtPrecio.Text != "")
                 {
@@ -95,22 +113,31 @@ namespace articulos_web
                 
                 Response.Redirect("AdminArticulos.aspx", false);
             }
+            catch (System.Threading.ThreadAbortException ex) { }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
-                Response.Redirect("error.aspx");
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
 
         protected void txtImagenUrl_TextChanged(object sender, EventArgs e)
         {
-            if (txtImagenUrl.Text == "")
+            try
             {
-                imgArticulo.ImageUrl = "https://i.pinimg.com/474x/e8/ee/07/e8ee0728e1ba12edd484c111c1f492f2.jpg";
+                if (txtImagenUrl.Text == "")
+                {
+                    imgArticulo.ImageUrl = "https://i.pinimg.com/474x/e8/ee/07/e8ee0728e1ba12edd484c111c1f492f2.jpg";
+                }
+                else
+                {
+                    imgArticulo.ImageUrl = txtImagenUrl.Text;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                imgArticulo.ImageUrl = txtImagenUrl.Text;
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
 
@@ -132,7 +159,8 @@ namespace articulos_web
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
     }

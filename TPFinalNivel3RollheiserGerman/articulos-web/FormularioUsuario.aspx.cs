@@ -49,6 +49,7 @@ namespace articulos_web
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
 
@@ -56,12 +57,36 @@ namespace articulos_web
         {
             try
             {
+                Page.Validate();
+                if (!Page.IsValid)
+                {
+                    return;
+                }
+
                 Usuario u = new Usuario();
                 UsuarioNegocio n = new UsuarioNegocio();
                 u.Nombre = txtNombre.Text;
                 u.Apellido = txtApellido.Text;
                 u.Email = txtEmail.Text;
                 u.Pass = txtPass.Text;
+
+                if (Validacion.validaTextoVacio(txtEmail) || Validacion.validaTextoVacio(txtPass))
+                {
+                    Session.Add("error", "Email y password son campos requeridos.");
+                    Response.Redirect("Error.aspx");
+                }
+
+                if (Validacion.validaEmail(txtEmail.Text))
+                {
+                    Session.Add("error", "No ingresó un formato email. Ejemplo: hola@gmail.com");
+                    Response.Redirect("Error.aspx");
+                }
+
+                if (Validacion.validaPassword(txtPass.Text))
+                {
+                    Session.Add("error", "El campo password requere un mínimo de 3 caracteres y un máximo de 20 caracteres.");
+                    Response.Redirect("Error.aspx");
+                }
 
                 if (ddlTipos.SelectedValue == TipoUsuario.NORMAL.ToString())
                 {
@@ -107,10 +132,11 @@ namespace articulos_web
 
                 Response.Redirect("AdminUsuarios.aspx", false);
             }
+            catch (System.Threading.ThreadAbortException ex) { }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
-                Response.Redirect("error.aspx");
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
 
@@ -132,7 +158,8 @@ namespace articulos_web
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
     }

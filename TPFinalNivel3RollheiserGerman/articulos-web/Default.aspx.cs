@@ -16,44 +16,68 @@ namespace articulos_web
         public List<Articulo> ListaArticulo { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            ListaArticulo = negocio.toList();
-
-            if (!IsPostBack)
+            try
             {
-                repRepetidor.DataSource = ListaArticulo;
-                repRepetidor.DataBind();
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                ListaArticulo = negocio.toList();
+
+                if (!IsPostBack)
+                {
+                    repRepetidor.DataSource = ListaArticulo;
+                    repRepetidor.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
 
         protected void txtBuscar_TextChanged(object sender, EventArgs e)
         {
-            if (txtBuscar.Text == "")
+            try
             {
-                repRepetidor.DataSource = ListaArticulo;
-                repRepetidor.DataBind();
+                if (txtBuscar.Text == "")
+                {
+                    repRepetidor.DataSource = ListaArticulo;
+                    repRepetidor.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
-            List<Articulo> listaFiltradaNombre = ListaArticulo.FindAll(x => x.Nombre.ToUpper().Contains(txtBuscar.Text.ToUpper()));
-            List<Articulo> listaFiltradaMarca = ListaArticulo.FindAll(x => x.Marca.Descripcion.ToUpper().Contains(txtBuscar.Text.ToUpper()));
-            List<Articulo> listaFiltradaCategoria = ListaArticulo.FindAll(x => x.Categoria.Descripcion.ToUpper().Contains(txtBuscar.Text.ToUpper()));
+            try
+            {
+                List<Articulo> listaFiltradaNombre = ListaArticulo.FindAll(x => x.Nombre.ToUpper().Contains(txtBuscar.Text.ToUpper()));
+                List<Articulo> listaFiltradaMarca = ListaArticulo.FindAll(x => x.Marca.Descripcion.ToUpper().Contains(txtBuscar.Text.ToUpper()));
+                List<Articulo> listaFiltradaCategoria = ListaArticulo.FindAll(x => x.Categoria.Descripcion.ToUpper().Contains(txtBuscar.Text.ToUpper()));
 
-            if (rdbNombre.Checked)
-            {
-                repRepetidor.DataSource = listaFiltradaNombre;
+                if (rdbNombre.Checked)
+                {
+                    repRepetidor.DataSource = listaFiltradaNombre;
+                }
+                else if (rdbMarca.Checked)
+                {
+                    repRepetidor.DataSource = listaFiltradaMarca;
+                }
+                else
+                {
+                    repRepetidor.DataSource = listaFiltradaCategoria;
+                }
+                repRepetidor.DataBind();
             }
-            else if (rdbMarca.Checked)
+            catch (Exception ex)
             {
-                repRepetidor.DataSource = listaFiltradaMarca;
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
-            else
-            {
-                repRepetidor.DataSource = listaFiltradaCategoria;
-            }
-            repRepetidor.DataBind();
         }
     }
 }

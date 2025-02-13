@@ -15,100 +15,116 @@ namespace articulos_web
         public List<Articulo> ListaArticulo { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
-                MarcaNegocio m = new MarcaNegocio();
-                List<Marca> lista = m.toList();
-                ddlMarcas.DataSource = lista;
-                ddlMarcas.DataValueField = "Id";
-                ddlMarcas.DataTextField = "Descripcion";
-                ddlMarcas.DataBind();
-
-                CategoriaNegocio c = new CategoriaNegocio();
-                List<Categoria> lista2 = c.toList();
-                ddlCategorias.DataSource = lista2;
-                ddlCategorias.DataValueField = "Id";
-                ddlCategorias.DataTextField = "Descripcion";
-                ddlCategorias.DataBind();
-            }
-
-            string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
-            if (id != "" && !IsPostBack)
-            {
-                ArticuloNegocio negocio = new ArticuloNegocio();
-                Articulo seleccionado = (negocio.toList(id))[0];
-
-                //Pre cargar los campos
-                txtId.Text = id;
-                txtCodigo.Text = seleccionado.Codigo;
-                txtNombre.Text = seleccionado.Nombre;
-                txtDescripcion.Text = seleccionado.Descripcion;
-                txtPrecio.Text = seleccionado.Precio.ToString();
-                txtImagenUrl.Text = seleccionado.ImagenUrl;
-                ddlMarcas.SelectedValue = seleccionado.Marca.Id.ToString();
-                ddlCategorias.SelectedValue = seleccionado.Categoria.Id.ToString();
-
-                //Transformar lista de favoritos en lista de articulos
-                if (Seguridad.activeSession(Session["usuario"]))
+                if (!IsPostBack)
                 {
-                    Usuario usuario = (Usuario)Session["usuario"];
-                    string idUser = usuario.Id.ToString();
-                    int idUserSesion = usuario.Id;
-                    ArticuloNegocio negocioArt = new ArticuloNegocio();
-                    ListaArticulo = negocioArt.toList();
-                    FavoritoNegocio favoritoNegocio = new FavoritoNegocio();
-                    ListaFavorito = favoritoNegocio.toList(idUser);
-                    List<Articulo> listaFavArt = new List<Articulo>();
+                    MarcaNegocio m = new MarcaNegocio();
+                    List<Marca> lista = m.toList();
+                    ddlMarcas.DataSource = lista;
+                    ddlMarcas.DataValueField = "Id";
+                    ddlMarcas.DataTextField = "Descripcion";
+                    ddlMarcas.DataBind();
 
-                    foreach (var item in ListaFavorito)
+                    CategoriaNegocio c = new CategoriaNegocio();
+                    List<Categoria> lista2 = c.toList();
+                    ddlCategorias.DataSource = lista2;
+                    ddlCategorias.DataValueField = "Id";
+                    ddlCategorias.DataTextField = "Descripcion";
+                    ddlCategorias.DataBind();
+                }
+
+                string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+                if (id != "" && !IsPostBack)
+                {
+                    ArticuloNegocio negocio = new ArticuloNegocio();
+                    Articulo seleccionado = (negocio.toList(id))[0];
+
+                    //Pre cargar los campos
+                    txtId.Text = id;
+                    txtCodigo.Text = seleccionado.Codigo;
+                    txtNombre.Text = seleccionado.Nombre;
+                    txtDescripcion.Text = seleccionado.Descripcion;
+                    txtPrecio.Text = seleccionado.Precio.ToString();
+                    txtImagenUrl.Text = seleccionado.ImagenUrl;
+                    ddlMarcas.SelectedValue = seleccionado.Marca.Id.ToString();
+                    ddlCategorias.SelectedValue = seleccionado.Categoria.Id.ToString();
+
+                    //Transformar lista de favoritos en lista de articulos
+                    if (Seguridad.activeSession(Session["usuario"]))
                     {
-                        int idUserFav = item.IdUser;
-                        int idArtFav = item.IdArticulo;
+                        Usuario usuario = (Usuario)Session["usuario"];
+                        string idUser = usuario.Id.ToString();
+                        int idUserSesion = usuario.Id;
+                        ArticuloNegocio negocioArt = new ArticuloNegocio();
+                        ListaArticulo = negocioArt.toList();
+                        FavoritoNegocio favoritoNegocio = new FavoritoNegocio();
+                        ListaFavorito = favoritoNegocio.toList(idUser);
+                        List<Articulo> listaFavArt = new List<Articulo>();
 
-                        if (idUserSesion == idUserFav)
+                        foreach (var item in ListaFavorito)
                         {
-                            foreach (var item2 in ListaArticulo)
+                            int idUserFav = item.IdUser;
+                            int idArtFav = item.IdArticulo;
+
+                            if (idUserSesion == idUserFav)
                             {
-                                if (idArtFav == item2.Id)
+                                foreach (var item2 in ListaArticulo)
                                 {
-                                    Articulo articulo = new Articulo();
-                                    articulo.Id = item2.Id;
-                                    articulo.Codigo = item2.Codigo;
-                                    articulo.Nombre = item2.Nombre;
-                                    articulo.Descripcion = item2.Descripcion;
-                                    articulo.Marca = new Marca();
-                                    articulo.Marca.Id = item2.Marca.Id;
-                                    articulo.Marca.Descripcion = item2.Marca.Descripcion;
-                                    articulo.Categoria = new Categoria();
-                                    articulo.Categoria.Id = item2.Categoria.Id;
-                                    articulo.Categoria.Descripcion = item2.Categoria.Descripcion;
-                                    articulo.ImagenUrl = item2.ImagenUrl;
-                                    articulo.Precio = item2.Precio;
-                                    listaFavArt.Add(articulo);
+                                    if (idArtFav == item2.Id)
+                                    {
+                                        Articulo articulo = new Articulo();
+                                        articulo.Id = item2.Id;
+                                        articulo.Codigo = item2.Codigo;
+                                        articulo.Nombre = item2.Nombre;
+                                        articulo.Descripcion = item2.Descripcion;
+                                        articulo.Marca = new Marca();
+                                        articulo.Marca.Id = item2.Marca.Id;
+                                        articulo.Marca.Descripcion = item2.Marca.Descripcion;
+                                        articulo.Categoria = new Categoria();
+                                        articulo.Categoria.Id = item2.Categoria.Id;
+                                        articulo.Categoria.Descripcion = item2.Categoria.Descripcion;
+                                        articulo.ImagenUrl = item2.ImagenUrl;
+                                        articulo.Precio = item2.Precio;
+                                        listaFavArt.Add(articulo);
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    //Comprobar si ya existe para modificar el toggle
-                    if (listaFavArt.Any(a => a.Id == seleccionado.Id))
-                    {
-                        lblNoFav.Visible = true;
-                        lblFav.Visible = false;
+                        //Comprobar si ya existe para modificar el toggle
+                        if (listaFavArt.Any(a => a.Id == seleccionado.Id))
+                        {
+                            lblNoFav.Visible = true;
+                            lblFav.Visible = false;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
 
         protected void txtImagenUrl_Load(object sender, EventArgs e)
         {
-            if (txtImagenUrl.Text == "")
+            try
             {
-                imgArticulo.ImageUrl = "https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg";
+                if (txtImagenUrl.Text == "")
+                {
+                    imgArticulo.ImageUrl = "https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg";
+                }
+                else
+                {
+                    imgArticulo.ImageUrl = txtImagenUrl.Text;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                imgArticulo.ImageUrl = txtImagenUrl.Text;
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
 
@@ -141,7 +157,7 @@ namespace articulos_web
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
+                Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx");
             }
         }
@@ -167,7 +183,7 @@ namespace articulos_web
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
+                Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx");
             }
         }

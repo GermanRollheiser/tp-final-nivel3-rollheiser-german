@@ -178,6 +178,7 @@
     <Compile Include="Signup.aspx.designer.cs">
       <DependentUpon>Signup.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Validacion.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="MiMaster.Master" />

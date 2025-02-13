@@ -13,38 +13,54 @@ namespace articulos_web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!(Page is Login || Page is Signup || Page is Default || Page is Detalle || Page is Error))
+            try
             {
-                if (!Seguridad.activeSession(Session["usuario"]))
+                if (!(Page is Login || Page is Signup || Page is Default || Page is Detalle || Page is Error))
                 {
-                    Response.Redirect("Login.aspx", false);
+                    if (!Seguridad.activeSession(Session["usuario"]))
+                    {
+                        Response.Redirect("Login.aspx", false);
+                    }
                 }
-            }
 
-            if (Seguridad.activeSession(Session["usuario"]))
-            {
-                Usuario usuario = (Usuario)Session["usuario"];
-                lblPerfil.Text = "Hola " + ((Usuario)Session["usuario"]).Email;
-
-                if (!string.IsNullOrEmpty(usuario.ImagenPerfil))
+                if (Seguridad.activeSession(Session["usuario"]))
                 {
-                    imgAvatar.ImageUrl = "~/Images/" + usuario.ImagenPerfil + "?v=" + DateTime.Now.Ticks.ToString();
+                    Usuario usuario = (Usuario)Session["usuario"];
+                    lblPerfil.Text = "Hola " + ((Usuario)Session["usuario"]).Email;
+
+                    if (!string.IsNullOrEmpty(usuario.ImagenPerfil))
+                    {
+                        imgAvatar.ImageUrl = "~/Images/" + usuario.ImagenPerfil + "?v=" + DateTime.Now.Ticks.ToString();
+                    }
+                    else
+                    {
+                        imgAvatar.ImageUrl = "https://www.pngkey.com/png/full/503-5035055_a-festival-celebrating-tractors-profile-picture-placeholder-round.png";
+                    }
                 }
                 else
                 {
                     imgAvatar.ImageUrl = "https://www.pngkey.com/png/full/503-5035055_a-festival-celebrating-tractors-profile-picture-placeholder-round.png";
                 }
             }
-            else
+            catch (Exception ex)
             {
-                imgAvatar.ImageUrl = "https://www.pngkey.com/png/full/503-5035055_a-festival-celebrating-tractors-profile-picture-placeholder-round.png";
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
 
         protected void btnSalir_Click(object sender, EventArgs e)
         {
-            Session.Clear();
-            Response.Redirect("Login.aspx");
+            try
+            {
+                Session.Clear();
+                Response.Redirect("Login.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
         }
     }
 }

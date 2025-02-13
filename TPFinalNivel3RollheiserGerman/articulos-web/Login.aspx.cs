@@ -22,8 +22,33 @@ namespace articulos_web
             UsuarioNegocio negocio = new UsuarioNegocio();
             try
             {
+                Page.Validate();
+                if (!Page.IsValid)
+                {
+                    return;
+                }
+
                 usuario.Email = txtEmail.Text;
                 usuario.Pass = txtPass.Text;
+
+                if (Validacion.validaTextoVacio(txtEmail) || Validacion.validaTextoVacio(txtPass))
+                {
+                    Session.Add("error", "Debes completar ambos campos.");
+                    Response.Redirect("Error.aspx");
+                }
+
+                if (Validacion.validaEmail(txtEmail.Text))
+                {
+                    Session.Add("error", "No ingresó un formato email. Ejemplo: hola@gmail.com");
+                    Response.Redirect("Error.aspx");
+                }
+
+                if (Validacion.validaPassword(txtPass.Text))
+                {
+                    Session.Add("error", "El campo password requere un mínimo de 3 caracteres y un máximo de 20 caracteres.");
+                    Response.Redirect("Error.aspx");
+                }
+
                 if (negocio.toLogin(usuario))
                 {
                     Session.Add("usuario", usuario);
@@ -42,6 +67,7 @@ namespace articulos_web
                     Response.Redirect("Error.aspx", false);
                 }
             }
+            catch (System.Threading.ThreadAbortException ex) { }
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());

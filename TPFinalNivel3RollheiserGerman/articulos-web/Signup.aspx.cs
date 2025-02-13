@@ -22,6 +22,12 @@ namespace articulos_web
         {
             try
             {
+                Page.Validate();
+                if (!Page.IsValid)
+                {
+                    return;
+                }
+
                 Usuario nuevo = new Usuario();
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 nuevo.Nombre = txtNombre.Text;
@@ -30,6 +36,30 @@ namespace articulos_web
                 nuevo.Pass = txtPass.Text;
                 nuevo.Pass = txtPassConfirmar.Text;
                 nuevo.TipoUsuario = TipoUsuario.NORMAL;
+
+                if (Validacion.validaTextoVacio(txtEmail) || Validacion.validaTextoVacio(txtPass))
+                {
+                    Session.Add("error", "Email y password son campos requeridos.");
+                    Response.Redirect("Error.aspx");
+                }
+
+                if (Validacion.validaEmail(txtEmail.Text))
+                {
+                    Session.Add("error", "No ingresó un formato email. Ejemplo: hola@gmail.com");
+                    Response.Redirect("Error.aspx");
+                }
+
+                if (Validacion.validaPassword(txtPass.Text))
+                {
+                    Session.Add("error", "El campo password requere un mínimo de 3 caracteres y un máximo de 20 caracteres.");
+                    Response.Redirect("Error.aspx");
+                }
+
+                if (txtPass.Text != txtPassConfirmar.Text)
+                {
+                    Session.Add("error", "Los campos password y confirmar password deben ser iguales");
+                    Response.Redirect("Error.aspx");
+                }
 
                 //Escribir img si se cargó algo
                 if (imagenPerfil.PostedFile.FileName != "")
@@ -49,9 +79,10 @@ namespace articulos_web
 
                 Response.Redirect("Default.aspx", false);
             }
+            catch (System.Threading.ThreadAbortException ex) { }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
+                Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx");
             }
         }
