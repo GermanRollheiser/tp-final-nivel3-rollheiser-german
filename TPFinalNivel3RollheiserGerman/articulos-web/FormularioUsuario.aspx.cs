@@ -130,6 +130,17 @@ namespace articulos_web
                 Image img = (Image)Master.FindControl("imgAvatar");
                 img.ImageUrl = "~/Images/" + u.ImagenPerfil + "?v=" + DateTime.Now.Ticks.ToString();
 
+                if (Seguridad.activeSession(Session["usuario"]))
+                {
+                    Usuario usuario = (Usuario)Session["usuario"];
+                    UsuarioNegocio negocio = new UsuarioNegocio();
+                    if (usuario.TipoUsuario == TipoUsuario.ADMIN)
+                    {
+                        Session.Add("usuario", usuario);
+                        negocio.toLogin(usuario);
+                    }
+                }
+
                 Response.Redirect("AdminUsuarios.aspx", false);
             }
             catch (System.Threading.ThreadAbortException ex) { }

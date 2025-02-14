@@ -84,15 +84,15 @@ namespace articulos_web
                     Response.Redirect("Error.aspx");
                 }
 
-                if (Validacion.validaPrecio(txtPrecio.Text))
-                {
-                    Session.Add("error", "El campo precio requere solo números en formato dinero. Ejemplo: 1.00");
-                    Response.Redirect("Error.aspx");
-                }
-
                 if (txtPrecio.Text != "")
                 {
                     a.Precio = decimal.Parse(txtPrecio.Text);
+
+                    if (Validacion.validaPrecio(txtPrecio.Text))
+                    {
+                        Session.Add("error", "El campo precio requere solo números en formato dinero. Ejemplo: 1,00");
+                        Response.Redirect("Error.aspx");
+                    }
                 }
                 
                 a.ImagenUrl = txtImagenUrl.Text;
