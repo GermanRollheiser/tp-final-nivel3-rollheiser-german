@@ -51,7 +51,7 @@ namespace product
 
         public static bool validaPrecio(object pattern)
         {
-            Regex precio = new Regex(@"\d+(\,\d\d)?$");
+            Regex precio = new Regex(@"\d+(\.\d\d)?$");
 
             if (!precio.IsMatch(pattern.ToString()))
             {

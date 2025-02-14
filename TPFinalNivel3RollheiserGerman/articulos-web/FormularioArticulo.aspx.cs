@@ -90,7 +90,7 @@ namespace articulos_web
 
                     if (Validacion.validaPrecio(txtPrecio.Text))
                     {
-                        Session.Add("error", "El campo precio requere solo números en formato dinero. Ejemplo: 1,00");
+                        Session.Add("error", "El campo precio requere solo números en formato dinero. Ejemplo: 1.00");
                         Response.Redirect("Error.aspx");
                     }
                 }

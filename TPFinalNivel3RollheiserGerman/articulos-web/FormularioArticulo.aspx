@@ -36,7 +36,7 @@
             <div class="mb-3">
                 <label for="txtPrecio" class="form-label">Precio</label>
                 <asp:TextBox ID="txtPrecio" CssClass="form-control" runat="server"></asp:TextBox>
-                <asp:RegularExpressionValidator CssClass="validacion" ErrorMessage="Solo números en formato dinero. Ejemplo: 1.00" ControlToValidate="txtPrecio" ValidationExpression="\d+(\,\d\d)?$" 
+                <asp:RegularExpressionValidator CssClass="validacion" ErrorMessage="Solo números en formato dinero. Ejemplo: 1.00" ControlToValidate="txtPrecio" ValidationExpression="\d+(\.\d\d)?$" 
                     runat="server" />
             </div>
             <div class="mb-3">
