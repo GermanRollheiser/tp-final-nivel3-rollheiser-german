@@ -14,10 +14,17 @@ namespace articulos_web
         public bool ConfirmaEliminacion { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            txtId.Enabled = false;
-            ConfirmaEliminacion = false;
             try
             {
+                if (Session["usuario"] == null || ((Usuario)Session["usuario"]).TipoUsuario == TipoUsuario.NORMAL)
+                {
+                    Session.Add("error", "Necesitás permisos como admin para ingresar");
+                    Response.Redirect("Error.aspx", false);
+                }
+
+                txtId.Enabled = false;
+                ConfirmaEliminacion = false;
+
                 //Configuración inicial
                 if (!IsPostBack)
                 {
